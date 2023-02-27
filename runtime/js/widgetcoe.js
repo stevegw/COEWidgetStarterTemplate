@@ -29,7 +29,7 @@ class Widgetcoe {
             this.vuforiaScope.$parent.$applyAsync();
 
         } else {
-            // add more functions
+            // add more functions here with else if 
         
         }
 

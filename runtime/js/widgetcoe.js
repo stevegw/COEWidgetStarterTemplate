@@ -1,5 +1,10 @@
 
 
+  // When making changes to either the design or ng files you will need to stop and start the Vuforia Studio service
+  // Changes to your implemenation file in this case called widgetcoe.js you only need to start preview again
+
+
+
 class Widgetcoe {
 
     actionBuilder;
@@ -9,11 +14,11 @@ class Widgetcoe {
     width;
     height;
 
-    constructor(vuforiaScope, data, renderer, actionid, width, height, topoffset, leftoffset) {
+    constructor(vuforiaScope, data,  actionid, width, height) {
 
+        // Not using the topoffset, leftoffset yet
         this.vuforiaScope  = vuforiaScope;
         this.data = data;
-        this.renderer = renderer;
         this.actionid = actionid;
         this.width = width;
         this.height = height;

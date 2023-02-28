@@ -1,5 +1,19 @@
 // This widget definition will get combined into combined-widgets.js file along with all other widget definitions
 // use of anonymous func ensures nothing here leaks into global scope
+
+
+
+  // If you copy this extension to create your own extension as a starter be very careful with the naming structure
+  // The are some case senitivity issues I have not fully understood I follow
+  // Dont use copy past replace all. 
+  // For example if you are creating a new widget called amazingar
+  // Do a search for twxWidgetcoe and replace with  twxAmazingar
+  // Do a search for twx-widgetcoe and replace with twx-amazingar
+  // Use the approach in -ng.js too
+  //
+  // When making chnages to either the design or ng files you will need to stop and start the Vuforia Studio service
+  // Changes to your implemenation file in this case called widgetcoe.js you only need to start preview again
+
 (function() {
   function twxWidgetcoe() {
     return {
@@ -8,10 +22,12 @@
       elementTag: 'twx-widgetcoe',
 
       // Text displayed for the widget in the Palette
-      label: 'Widget COE',
+      // This will also be the name of the icon in ide/images directory
+      label: 'Widget COE', 
 
       // category to assign the widget to, this value will be used by the
       // project definition to filter which widgets are valid for that type of project
+      // Using ar places it in the 3D not the 2D widget collection
       category: 'ar',
 
       // list of groups this widget will be included in the widget palette
@@ -102,6 +118,7 @@
         }
       ],
 
+       // List of services that will displayed in the widget properties panel
       services: [
         {
           name: 'start',
@@ -125,6 +142,13 @@
         }
       ],
 
+      // If you copy this extension to create your own extension as a starter be very careful with the naming structure
+      // For example if you are creating a new widget called amazingar
+      // Rename your files to suit
+      // widgetcoe-ng.js will become amazingar-ng.js
+      // widgetcoe.js will become amazingar.js
+      // use the amazingar as a prefix to images helps remind you where they are being used
+
       dependencies: {
         files         : ['js/widgetcoe-ng.js','js/widgetcoe.js', 'images/widgetcoe_close.png' ,'images/widgetcoe_expand.png'],
         angularModules: ['widgetcoe-ng']
@@ -135,8 +159,15 @@
         return '<div class="widgetcoeWidget"></div>';
       },
 
+      //
+      // Been very careful with the syntax in this section
+      // I'm following the use model others have defined and this pattern works
+      // use {{ for incoming properties }}
+      // use double quotes for " outgoing properties "
+      // and always have a delegate-field="delegate" defined
+      //
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-widgetcoe  incomingdata-field="me.incomingdata"    outgoingdata-field="me.outgoingdata" actionid-field={{me.actionid}} autolaunch-field={{me.autolaunch}}   width-field={{me.width}} height-field={{me.height}} topoffset-field={{me.topoffset}} leftoffset-field={{me.leftoffset}}  delegate-field="delegate"></div>' ; 
+        var tmpl = '<div ng-widgetcoe  incomingdata-field={{me.incomingdata}}  outgoingdata-field="me.outgoingdata" actionid-field={{me.actionid}} autolaunch-field={{me.autolaunch}}   width-field={{me.width}} height-field={{me.height}} topoffset-field={{me.topoffset}} leftoffset-field={{me.leftoffset}}  delegate-field="delegate"></div>' ; 
         return tmpl;
       }
     };

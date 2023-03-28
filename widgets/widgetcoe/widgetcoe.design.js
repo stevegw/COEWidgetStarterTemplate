@@ -67,7 +67,10 @@
           showInput: true,
           editor: 'select',
           options: [
-            {label: 'Work InstructionDialog', value: "WorkInstructionDialog"},
+            {label: 'Information Dialog', value: "WorkInstructionDialog"},
+            {label: 'Get Work Orders', value: "GetWorkOrder"},
+            {label: 'Get Work Instructions', value: "GetWorkInstructions"},
+            //{label: 'GetMetaList', value: "GetMetaList"},
             {label: 'No action', value: "NoAction"}
             ]
         },
@@ -150,7 +153,7 @@
       // use the amazingar as a prefix to images helps remind you where they are being used
 
       dependencies: {
-        files         : ['js/widgetcoe-ng.js','js/widgetcoe.js', 'images/widgetcoe_close.png' ,'images/widgetcoe_expand.png'],
+        files         : ['js/widgetcoe-ng.js','js/widgetcoe.js','images/widgetcoe_back.png', 'images/widgetcoe_next.png' ,'images/widgetcoe_expand.png'],
         angularModules: ['widgetcoe-ng']
       },
 

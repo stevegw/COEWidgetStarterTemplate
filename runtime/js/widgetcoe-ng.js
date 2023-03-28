@@ -67,7 +67,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           //
           if (widgetcoe == undefined) {
             try {
-               widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField );
+               widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField);
             }catch(ex) {
               console.log('Creating the class Widgetcoe - somethimg when wrong! The exception >>'+ ex);
             }

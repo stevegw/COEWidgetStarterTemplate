@@ -42,6 +42,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         heightField : '@',
         topoffsetField : '@',
         leftoffsetField : '@',
+        modelidField : '@',
         delegateField: '='     // This a special field used to pass events like start 
 
       },
@@ -67,7 +68,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           //
           if (widgetcoe == undefined) {
             try {
-               widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField);
+               widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField , scope.modelidField);
             }catch(ex) {
               console.log('Creating the class Widgetcoe - somethimg when wrong! The exception >>'+ ex);
             }
@@ -87,6 +88,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           console.log('Starting');
           // decide what to do when the start is fired
           // and let others know
+
+          
           scope.$parent.fireEvent('started');
           executeWidget();
         }
@@ -132,6 +135,14 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           // This is just shown as a another ference watch
 
         });
+        scope.$watch('outgoingdataField', function () {
+          console.log('outgoingdataField='+ scope.outgoingdataField);
+          //
+          // Write your code here
+          // Currently ther is no logic required to do anything on action change
+          // This is just shown as a another ference watch
+
+        });
 
         //
         // delegateField watch is used to listen to events fired by the UI
@@ -139,9 +150,13 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         //
         scope.$watch('delegateField', function (delegate) {
           if (delegate) {
-            delegate.start = function () { 
-              start(); 
-            };
+            // delegate.start = function () { 
+            //   start(); 
+            // };
+
+            delegate.start = function () {
+              $timeout(start,5);             };
+
             delegate.stop = function () { 
               stop(); 
             };

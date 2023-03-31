@@ -118,6 +118,15 @@
           isBindingTarget: true,
           isBindingSource: false,
           showInput: true
+        },
+        {
+          name: 'modelid',
+          label: 'Model ID',
+          datatype: 'string',
+          default: 'model-1',
+          isBindingTarget: true,
+          isBindingSource: false,
+          showInput: true
         }
       ],
 
@@ -170,7 +179,7 @@
       // and always have a delegate-field="delegate" defined
       //
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-widgetcoe  incomingdata-field="me.incomingdata"  outgoingdata-field="me.outgoingdata" actionid-field={{me.actionid}} autolaunch-field={{me.autolaunch}}   width-field={{me.width}} height-field={{me.height}} topoffset-field={{me.topoffset}} leftoffset-field={{me.leftoffset}}  delegate-field="delegate"></div>' ; 
+        var tmpl = '<div ng-widgetcoe  incomingdata-field="me.incomingdata"  outgoingdata-field="me.outgoingdata" actionid-field={{me.actionid}} autolaunch-field={{me.autolaunch}}   width-field={{me.width}} height-field={{me.height}} topoffset-field={{me.topoffset}} leftoffset-field={{me.leftoffset} modelid-field={{me.modelid}}  }  delegate-field="delegate"></div>' ; 
         return tmpl;
       }
     };

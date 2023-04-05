@@ -241,3 +241,16 @@ $primary-background-color:  rgba(12,78,241,0.30);
 
   }
 
+  .scroller-img {
+	//background: transparent 
+	//animation: infinite-shift-right 5000s linear;
+	//background-size: auto 100%;
+  //  background-position: left 1000px top;
+	min-height: calc(100% + env(safe-area-inset-top));
+	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+	background-attachment: fixed;
+	background:  transparent  url(../app/resources/Uploaded/2023-03-30_15-43-24.jpg) repeat-x 50% 0;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+  }

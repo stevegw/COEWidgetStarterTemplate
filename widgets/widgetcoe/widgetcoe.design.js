@@ -162,7 +162,7 @@
       // use the amazingar as a prefix to images helps remind you where they are being used
 
       dependencies: {
-        files         : ['js/widgetcoe-ng.js','js/widgetcoe.js','images/widgetcoe_back.png', 'images/widgetcoe_next.png' ,'images/widgetcoe_expand.png'],
+        files         : ['js/widgetcoe-ng.js','js/widgetcoe.js', 'images/widgetcoe_back.png', 'images/widgetcoe_next.png' ,'images/widgetcoe_expand.png'],
         angularModules: ['widgetcoe-ng']
       },
 

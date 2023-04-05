@@ -40,7 +40,6 @@ class Widgetcoe {
         else if (this.actionid == 'GetWorkInstructions') {
             this.getWorkInstructionsSteps (this.data);
         }
-        
         else if (this.actionid == 'GetMetaList') {
             this.getMetaList (this.data);
         }
@@ -99,6 +98,8 @@ class Widgetcoe {
         let listscope = this.vuforiaScope;
         function listSelection (e) {
             //alert('value ' + this.value);
+            // [{"WorkID":"W0001"}]
+            //listscope.outgoingdataField =  [{"WorkID": this.value}]; //this.value;
             listscope.outgoingdataField =  this.value;
             listscope.$parent.fireEvent('clicked');
             //const myTimeout = setTimeout( listscope.$parent.fireEvent('clicked'), 500);
@@ -275,10 +276,10 @@ class Widgetcoe {
 
             try { 
 
-                if (currentStep >  1 ) { 
+                if (currentStep != 1 ) { 
                     currentStep--;
                 } else {
-                    currentStep = this.data.length + 1;
+                    currentStep = this.data.length ;
                 }
 
                 InstructionHeaderLabelPanel.innerHTML = this.data[currentStep-1].StepType;//"This is the header text";
@@ -286,6 +287,7 @@ class Widgetcoe {
                 InstructionStepPanel.innerHTML = currentStep +" OF " + steps; 
                 
                 this.vuforiaScope.outgoingdataField = this.getSelectStepPart(currentStep);
+                this.vuforiaScope.$parent.fireEvent('clicked');
                 this.vuforiaScope.$parent.$applyAsync();
 
             } catch (ex) {
@@ -312,7 +314,7 @@ class Widgetcoe {
 
             try { 
 
-                if (currentStep -1  < this.data.length ) { 
+                if (currentStep -1  < this.data.length -1 ) { 
                     currentStep++;
                 } else {
                     currentStep = 1;
@@ -323,6 +325,7 @@ class Widgetcoe {
                 InstructionStepPanel.innerHTML = currentStep +" OF " + steps; 
 
                 this.vuforiaScope.outgoingdataField = this.getSelectStepPart(currentStep);
+                this.vuforiaScope.$parent.fireEvent('clicked');
                 this.vuforiaScope.$parent.$applyAsync();
 
             } catch (ex) {

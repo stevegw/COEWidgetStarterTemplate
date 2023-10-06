@@ -160,7 +160,7 @@ class Widgetcoe {
         let propertyname = partsList[0].MetadataPropertyName;
         let uniquepartid = partsList[0].MetadataID;
         let displayname = partsList[0].DisplayName;
-        let modelName = this.modelid;
+        let modelName =   partsList[0].ModelName; //this.modelid;
 
 
 

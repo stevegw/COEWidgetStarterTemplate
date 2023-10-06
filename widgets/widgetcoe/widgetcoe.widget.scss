@@ -254,3 +254,23 @@ $primary-background-color:  rgba(12,78,241,0.30);
 	background-repeat: no-repeat;
 	background-size: cover;
   }
+
+  .grid-container {
+    display: grid;
+    gap: 2px;
+    padding: 2px;
+    background-color: lightgray;
+	overflow: auto;
+	
+  }
+  .rowWrapper:hover > div{
+	background-color: orange;
+  }
+
+  .grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    //border: 1px solid black;
+  }

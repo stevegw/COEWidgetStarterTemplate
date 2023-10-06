@@ -55,6 +55,25 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
         let widgetcoe = undefined ;
 
+        scope.data = {  
+           args: undefined,
+           occurance: undefined,
+           timeout: $timeout,
+           http: $http
+         };
+
+        scope.$root.$on('tracking', function(evt, arg) {   
+          scope.data.args = arg; 
+          start();     
+        });
+        
+        scope.$root.$on('userpick', function(event, targetName, targetType, eventData) {   
+          var pathid     = JSON.parse(eventData).occurrence;
+          scope.data.occurance = pathid;    
+        });
+        
+
+
         scope.renderer = $window.cordova ? vuforia : $injector.get('threeJsTmlRenderer'); // if you are required to use the renderer - in this example I have not used it
         //
         // executeWidget is the main execute function 
@@ -68,7 +87,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           //
           if (widgetcoe == undefined) {
             try {
-               widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField , scope.modelidField);
+               widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField , scope.modelidField , scope.renderer);
             }catch(ex) {
               console.log('Creating the class Widgetcoe - somethimg when wrong! The exception >>'+ ex);
             }
@@ -89,7 +108,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           // decide what to do when the start is fired
           // and let others know
 
-          
           scope.$parent.fireEvent('started');
           executeWidget();
         }
@@ -100,6 +118,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           scope.$parent.fireEvent('stopped');
          
         }
+
+
+
 
         //
         // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -155,7 +176,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
             // };
 
             delegate.start = function () {
-              $timeout(start,5);             };
+              $timeout(start,5); 
+
+            };
 
             delegate.stop = function () { 
               stop(); 
@@ -170,7 +193,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         // Comment out once you have it working
         //
         scope.$watch( function() {
-          console.log("widgetcoe watching for anything happening - uncomment this when you have all you watches working"); 
+          //console.log("widgetcoe watching for anything happening - uncomment this when you have all you watches working"); 
         });
       }
     };

@@ -1,0 +1,32 @@
+[
+    {
+        "model": "model-tml",
+        "path": "/1/0/0/17",
+        "categories": {
+            "": {},
+            "__PV_SystemProperties": {
+                "Display Name": "Component_25_17",
+                "Part Path": "Illustration/2014_F150_CrewCab/instance_20/Component_25/Component_25_17",
+                "Child Count": "0",
+                "Component Name": "Component_25_17",
+                "Model Extents (mm)": "3078.1145",
+                "Scale": 0.029999999329447746,
+                "Instance Location": "-90.0 1.7191312 0.0 3.1166577 -3.2849124E-4 1.3186653 0.029999999329447746",
+                "Part Name": "Component_25_17",
+                "Model Bounds": "-2.1935341 0.7236265 0.5797631 0.8845805 2.2238839 0.96487",
+                "Direct Child Count": "0",
+                "Instance Transformation": "0 -0.029999999 0 3.116657769 0 0 0.029999999 -3.28491E-4 -0.029999999 0 0 1.318665233 0 0 0 1",
+                "Model Transformation": "0 -0.030000001 0 3.116657937 0 0 0.030000001 -3.28491E-4 -0.030000001 0 0 1.318665304 0 0 0 1",
+                "Model Location": "-90.0 1.7191314 0.0 3.116658 -3.2849124E-4 1.3186653 0.030000000947713778",
+                "OL File Name": "l-Creo 3D_0_model_728.ol",
+                "Part Depth": "5",
+                "Instance Type": 0,
+                "Instance ID": "17",
+                "Diagonal Model Extents (mm)": "3445.848",
+                "Component Bounds": "11.793176 74.40258 24.13183 24.63007 177.0064 74.1404",
+                "Part ID": "17",
+                "Part ID Path": "/1/0/0/17"
+            }
+        }
+    }
+]

@@ -68,9 +68,10 @@
           editor: 'select',
           options: [
             {label: 'Information Dialog', value: "WorkInstructionDialog"},
-            {label: 'Get Work Orders', value: "GetWorkOrder"},
-            {label: 'Get Work Instructions', value: "GetWorkInstructions"},
-            //{label: 'GetMetaList', value: "GetMetaList"},
+            {label: 'Display List', value: "DisplayList"},
+            {label: 'GetMetaList', value: "GetMetaList"},
+            {label: 'Move Model', value: "MoveModel"},
+            {label: 'Get Dynamic Model', value: "GetDynamicModel"},
             {label: 'No action', value: "NoAction"}
             ]
         },
@@ -162,7 +163,7 @@
       // use the amazingar as a prefix to images helps remind you where they are being used
 
       dependencies: {
-        files         : ['js/widgetcoe-ng.js','js/widgetcoe.js', 'images/widgetcoe_back.png', 'images/widgetcoe_next.png' ,'images/widgetcoe_expand.png'],
+        files         : ['js/widgetcoe-ng.js','js/widgetcoe.js', 'js/matrix.js', 'images/widgetcoe_back.png', 'images/widgetcoe_next.png' ,'images/widgetcoe_expand.png' , '/js/gridjs.production.min.js'],
         angularModules: ['widgetcoe-ng']
       },
 

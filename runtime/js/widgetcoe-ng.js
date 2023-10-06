@@ -62,10 +62,10 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
            http: $http
          };
 
-        scope.$root.$on('tracking', function(evt, arg) {   
-          scope.data.args = arg; 
-          start();     
-        });
+        // scope.$root.$on('tracking', function(evt, arg) {   
+        //   scope.data.args = arg; 
+        //   start();     
+        // });
         
         scope.$root.$on('userpick', function(event, targetName, targetType, eventData) {   
           var pathid     = JSON.parse(eventData).occurrence;

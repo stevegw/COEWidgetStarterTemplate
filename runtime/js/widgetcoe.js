@@ -871,7 +871,7 @@ class Widgetcoe {
                             let pvzId =  data.data.rows[0].id;
                             console.log(" data.data.rows[0].result >>>" + pvzPath);
                             console.log(" data.data.rows[0].result >>>" + pvzId);
-                            URL = '/Thingworx/Things' + '/CAD_Repo/Services/saveJsonMetaData ';
+                            URL = '/Thingworx/Things' + '/CAD_Repo/Services/saveJsonMetaData';
                            
                             appKeyParams = {
                                 "pvzId": pvzId

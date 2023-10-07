@@ -3,7 +3,7 @@ exports.extensionInfo = {
 };
 
 exports.runtimeAngularModulesRequires = [
-                                         "widgetcoethx-ng",
+                                         "widgetcoe-ng",
                                         ];
 
 

@@ -15,15 +15,15 @@
   // Changes to your implemenation file in this case called widgetcoe.js you only need to start preview again
 
 (function() {
-  function twxWidgetcoethx() {
+  function twxWidgetcoe() {
     return {
       // Required, this will be used as the top level tag when it's dropped on the Canvas
       // use a custom prefix to so the name won't collide with other widgets
-      elementTag: 'twx-widgetcoethx',
+      elementTag: 'twx-widgetcoe',
 
       // Text displayed for the widget in the Palette
       // This will also be the name of the icon in ide/images directory
-      label: 'Widget COE THX', 
+      label: 'Widget COE', 
 
       // category to assign the widget to, this value will be used by the
       // project definition to filter which widgets are valid for that type of project
@@ -119,6 +119,15 @@
           isBindingTarget: true,
           isBindingSource: false,
           showInput: true
+        },
+        {
+          name: 'modelid',
+          label: 'Model ID',
+          datatype: 'string',
+          default: 'model-1',
+          isBindingTarget: true,
+          isBindingSource: false,
+          showInput: true
         }
       ],
 
@@ -154,8 +163,8 @@
       // use the amazingar as a prefix to images helps remind you where they are being used
 
       dependencies: {
-        files         : ['js/widgetcoethx-ng.js','js/widgetcoethx.js', 'js/matrix.js', 'js/config.js', 'images/widgetcoethx_back.png', 'images/widgetcoethx_next.png' ,'images/widgetcoethx_expand.png' , '/js/gridjs.production.min.js'],
-        angularModules: ['widgetcoethx-ng']
+        files         : ['js/widgetcoe-ng.js','js/widgetcoe.js', 'js/matrix.js', 'images/widgetcoe_back.png', 'images/widgetcoe_next.png' ,'images/widgetcoe_expand.png' , '/js/gridjs.production.min.js'],
+        angularModules: ['widgetcoe-ng']
       },
 
       // HTML to render when the widget is dropped on the Canvas
@@ -171,7 +180,7 @@
       // and always have a delegate-field="delegate" defined
       //
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-widgetcoethx  incomingdata-field="me.incomingdata"  outgoingdata-field="me.outgoingdata" actionid-field={{me.actionid}} autolaunch-field={{me.autolaunch}}   width-field={{me.width}} height-field={{me.height}} topoffset-field={{me.topoffset}} leftoffset-field={{me.leftoffset} modelid-field={{me.modelid}}  }  delegate-field="delegate"></div>' ; 
+        var tmpl = '<div ng-widgetcoe  incomingdata-field="me.incomingdata"  outgoingdata-field="me.outgoingdata" actionid-field={{me.actionid}} autolaunch-field={{me.autolaunch}}   width-field={{me.width}} height-field={{me.height}} topoffset-field={{me.topoffset}} leftoffset-field={{me.leftoffset} modelid-field={{me.modelid}}  }  delegate-field="delegate"></div>' ; 
         return tmpl;
       }
     };
@@ -179,6 +188,6 @@
 
   // registers the widget in Studio so that it gets displayed in the Widget Palette, it will only show up in the
   // Widget Palette for views that this widget is registered for (as determined by category property)
-  twxAppBuilder.widget('twxWidgetcoethx', twxWidgetcoethx);
+  twxAppBuilder.widget('twxWidgetcoe', twxWidgetcoe);
 
 }());

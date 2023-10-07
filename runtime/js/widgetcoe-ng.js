@@ -85,15 +85,17 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           // As you work with Vuforia view and use the debugger, you will see that Vuforia View executes your code during startup, which is probably before you expect
           // During launch the UI fires - You will have to decide how your code reacts to undefined or blank inputs 
           //
-          if (widgetcoe == undefined) {
+          //if (widgetcoe == undefined) {
             try {
                widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField , scope.modelidField , scope.renderer);
-            }catch(ex) {
+               widgetcoe.doAction();
+           
+              }catch(ex) {
               console.log('Creating the class Widgetcoe - somethimg when wrong! The exception >>'+ ex);
             }
           }
-           widgetcoe.doAction();
-        };
+          
+        //};
 
         //
         // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -104,12 +106,16 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         // when start in fired
         //
         var start = function() {
-          console.log('Starting');
-          // decide what to do when the start is fired
-          // and let others know
 
-          scope.$parent.fireEvent('started');
-          executeWidget();
+          if (scope.incomingdataField != undefined && scope.incomingdataField != '') {
+            console.log('Starting');
+            // decide what to do when the start is fired
+            // and let others know
+
+            scope.$parent.fireEvent('started');
+            executeWidget();
+
+          }
         }
         var stop = function() {
           console.log('Stopping');
@@ -141,7 +147,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
             // If you do want to start when there is any incoming data change
             // provide a autolaunchField with a checkbox and check for true or false
             if (scope.autolaunchField == "true") {
-              start();
+              $timeout(start,250); 
             }
           }
 
@@ -176,7 +182,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
             // };
 
             delegate.start = function () {
-              $timeout(start,5); 
+
+              scope.$parent.$applyAsync();
+              $timeout(start,250); 
 
             };
 

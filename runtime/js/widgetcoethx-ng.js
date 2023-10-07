@@ -1,5 +1,5 @@
 if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.exports === exports) {
-  module.exports = 'widgetcoe-ng';
+  module.exports = 'widgetcoethx-ng';
 }
 
 (function () {
@@ -15,10 +15,10 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
   // When making chnages to either the design or ng files you will need to stop and start the Vuforia Studio service
   // Changes to your implemenation file in this case called widgetcoe.js you only need to start preview again
 
-  var widgetcoeModule = angular.module('widgetcoe-ng', []);
-  widgetcoeModule.directive('ngWidgetcoe', ['$timeout', '$interval', '$http', '$window', '$injector', ngWidgetcoe]);
+  var widgetcoeModule = angular.module('widgetcoethx-ng', []);
+  widgetcoeModule.directive('ngWidgetcoethx', ['$timeout', '$interval', '$http', '$window', '$injector', ngWidgetcoethx]);
 
-  function ngWidgetcoe($timeout, $interval, $http, $window, $injector) {
+  function ngWidgetcoethx($timeout, $interval, $http, $window, $injector) {
 
     return {
       restrict: 'EA',
@@ -42,7 +42,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         heightField : '@',
         topoffsetField : '@',
         leftoffsetField : '@',
-        modelidField : '@',
         delegateField: '='     // This a special field used to pass events like start 
 
       },
@@ -53,7 +52,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       template: '<div></div>',
       link: function (scope, element, attr) {
 
-        let widgetcoe = undefined ;
+        console.log(config.appKey);
+
+        let widgetcoethx = undefined ;
 
         scope.data = {  
            args: undefined,
@@ -80,18 +81,18 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         // Here we create the widgetcoe object and pass the params,   incoming data, action and size
         // 
         var executeWidget = function() {
-          console.log('executeWidget custom activities started');
+          console.log('executeWidget thx custom activities started');
           //
           // As you work with Vuforia view and use the debugger, you will see that Vuforia View executes your code during startup, which is probably before you expect
           // During launch the UI fires - You will have to decide how your code reacts to undefined or blank inputs 
           //
           //if (widgetcoe == undefined) {
             try {
-               widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField , scope.modelidField , scope.renderer);
-               widgetcoe.doAction();
+               widgetcoethx = new Widgetcoethx( config.appKey,  scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField , scope.renderer);
+               widgetcoethx.doAction();
            
               }catch(ex) {
-              console.log('Creating the class Widgetcoe - somethimg when wrong! The exception >>'+ ex);
+              console.log('Creating the class Widgetcoethx - somethimg when wrong! The exception >>'+ ex);
             }
           }
           

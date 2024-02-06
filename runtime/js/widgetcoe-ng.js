@@ -54,7 +54,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       template: '<div></div>',
       link: function (scope, element, attr) {
 
-        let widgetcoe = undefined ;
+        var widgetcoe = undefined ;
         let  runningHololens = false;
 
         runningHololens = function(props, $scope){
@@ -101,10 +101,54 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
                let runningHololens = true;
                scope.data.widgetRegister = new WidgetRegister( scope.renderer , $injector , scope , runningHololens );
 
+              if (!runningHololens) {
+                widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField , scope.modelidField , scope.renderer);
+                widgetcoe.doAction();
+
+              }  else {
+
+                if (scope.actionidField === 'RegisterWidgets') {
+
+                  try {
+      
+      
+                      //var modelsJSON = new Array();
+                      //modelsJSON.push( {'model' : "sphere-1" , 'src': "sphere.pvz" , 'x': "0", 'y': "0", 'z': "0" });
+                      //modelsJSON.push( {'model' : "sphere-2" , 'src': "sphere.pvz" , 'x': "0.1", 'y': "0", 'z': "0" });
+                      //modelsJSON.push( {'model' : "sphere-3" , 'src': "sphere.pvz" , 'x': "0.2", 'y': "0", 'z': "0" });
+      
+                      for (let index = 0; index < scope.data.widgets.length; index++) {
+                          const element = scope.data.widgets[index];
+                          scope.data.widgetRegister.addWidget({
+                              originalWidget: "twx-dt-model",
+                              id: element.model,
+                              src: "app/resources/Uploaded/"+element.src ,  //"app/resources/Uploaded/remote-control.pvz",
+                              x: element.x,
+                              y: element.y,
+                              z: element.z,
+                              rx: "0",
+                              ry: "0",
+                              rz: "0",
+                              visible : true,
+                              events:[{name:"modelLoaded", value: "app/resources/Uploaded/"+element.src }]
+                          })
+                          console.log("Model resource=" + "app/resources/Uploaded/"+element.src );
+      
+                      }
+                      scope.$applyAsync();
+      
+                      
+                  } catch (error) {
+                      console.log("Issues with widgetRegister error=" + error);
+                  }
+              }
 
 
-               widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField , scope.modelidField , scope.renderer);
-               widgetcoe.doAction();
+
+
+              }
+
+
            
               }catch(ex) {
               console.log('Creating the class Widgetcoe - somethimg when wrong! The exception >>'+ ex);
@@ -129,6 +173,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
             // and let others know
 
             scope.$parent.fireEvent('started');
+
             executeWidget();
 
           }

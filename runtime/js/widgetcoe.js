@@ -82,7 +82,7 @@ class Widgetcoe {
                         rx: "0",
                         ry: "0",
                         rz: "0",
-                        visible : "true",
+                        visible : true,
                         events:[{name:"modelLoaded", value: "someExample()"}]
                     })
                     console.log("Model" + element.src);

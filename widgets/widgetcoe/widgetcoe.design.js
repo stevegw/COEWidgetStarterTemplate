@@ -57,6 +57,18 @@
           isBindingSource: true,
           showInput: false
         },  
+
+        {
+          name: 'incomingresource',
+          label: 'Incoming resource',
+          datatype: 'resource_url',
+          default: '',
+          resource_url: true,
+          allowedPatterns: ['.json'],
+          isBindingTarget: true,
+          isBindingSource: false,
+          showInput: true
+        },
         {
           name: 'actionid',
           label: 'Some action ID',
@@ -72,6 +84,7 @@
             {label: 'GetMetaList', value: "GetMetaList"},
             {label: 'Move Model', value: "MoveModel"},
             {label: 'Get Dynamic Model', value: "GetDynamicModel"},
+            {label: 'Register Some Widgets' , value: 'RegisterWidgets'},
             {label: 'No action', value: "NoAction"}
             ]
         },
@@ -163,7 +176,7 @@
       // use the amazingar as a prefix to images helps remind you where they are being used
 
       dependencies: {
-        files         : ['js/widgetcoe-ng.js','js/widgetcoe.js', 'js/matrix.js', 'images/widgetcoe_back.png', 'images/widgetcoe_next.png' ,'images/widgetcoe_expand.png' , '/js/gridjs.production.min.js'],
+        files         : ['js/widgetcoe-ng.js','js/widgetcoe.js', 'js/matrix.js', 'js/widgetcreator.js', 'images/widgetcoe_back.png', 'images/widgetcoe_next.png' ,'images/widgetcoe_expand.png' , '/js/gridjs.production.min.js'],
         angularModules: ['widgetcoe-ng']
       },
 
@@ -180,7 +193,7 @@
       // and always have a delegate-field="delegate" defined
       //
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-widgetcoe  incomingdata-field="me.incomingdata"  outgoingdata-field="me.outgoingdata" actionid-field={{me.actionid}} autolaunch-field={{me.autolaunch}}   width-field={{me.width}} height-field={{me.height}} topoffset-field={{me.topoffset}} leftoffset-field={{me.leftoffset} modelid-field={{me.modelid}}  }  delegate-field="delegate"></div>' ; 
+        var tmpl = '<div ng-widgetcoe  incomingdata-field="me.incomingdata"   incomingresource-field="me.incomingresource"          outgoingdata-field="me.outgoingdata" actionid-field={{me.actionid}} autolaunch-field={{me.autolaunch}}   width-field={{me.width}} height-field={{me.height}} topoffset-field={{me.topoffset}} leftoffset-field={{me.leftoffset} modelid-field={{me.modelid}}  }  delegate-field="delegate"></div>' ; 
         return tmpl;
       }
     };

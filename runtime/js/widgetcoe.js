@@ -60,6 +60,41 @@ class Widgetcoe {
             this.getDynamicModel(this.vuforiaScope, this.data );
         }
 
+        else if (this.actionid === 'RegisterWidgets') {
+
+            try {
+
+
+                //var modelsJSON = new Array();
+                //modelsJSON.push( {'model' : "sphere-1" , 'src': "sphere.pvz" , 'x': "0", 'y': "0", 'z': "0" });
+                //modelsJSON.push( {'model' : "sphere-2" , 'src': "sphere.pvz" , 'x': "0.1", 'y': "0", 'z': "0" });
+                //modelsJSON.push( {'model' : "sphere-3" , 'src': "sphere.pvz" , 'x': "0.2", 'y': "0", 'z': "0" });
+
+                for (let index = 0; index < this.vuforiaScope.data.widgets.length; index++) {
+                    const element = this.vuforiaScope.data.widgets[index];
+                    this.vuforiaScope.data.widgetRegister.addWidget({
+                        originalWidget: "twx-dt-model",
+                        id: element.model,
+                        src: "app/resources/Uploaded/"+element.src ,  //"app/resources/Uploaded/remote-control.pvz",
+                        x: element.x,
+                        y: element.y,
+                        z: element.z,
+                        rx: "0",
+                        ry: "0",
+                        rz: "0",
+                        visible : "true",
+                        events:[{name:"modelLoaded", value: "someExample()"}]
+                    })
+                    console.log("Model" + element.src);
+
+                }
+
+                
+            } catch (error) {
+                console.log("Issues with widgetRegister error=" + error);
+            }
+        }
+
 
         else  {
             // add more functions here with else if 
@@ -68,323 +103,6 @@ class Widgetcoe {
 
     }
 
-    getWorkOrders = function () {
-
-        let PanelQuery = 'body > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > twx-widget > twx-widget-content > \n' +
-		'twx-container-content > twx-widget:nth-child(2) > twx-widget-content > div > twx-container-content';
-        let PanelSelector = document.querySelector(PanelQuery); 
-        let UIContainerWO = document.createElement('div');
-        UIContainerWO.id = 'ui-container-wo';
-        UIContainerWO.className = 'uicontainer'; 
-        UIContainerWO.style.width = "1px";
-        UIContainerWO.style.height = "1px";
-        UIContainerWO.style.top = this.top;
-        UIContainerWO.style.left = this.left;
-
-        var WorkOrderPanel = document.createElement('div');
-        WorkOrderPanel.id = 'workorder-panel';   
-        WorkOrderPanel.className = 'workorderpanel';  
-        //WorkOrderPanel.style.width = this.width;
-        //WorkOrderPanel.style.height = this.height; 
-
-
-        var WorkOrderHeaderPanel = document.createElement('div');
-        WorkOrderHeaderPanel.id = 'workorder-header-panel'; 
-        WorkOrderHeaderPanel.className = 'workorderheaderpanel';    
-        WorkOrderHeaderPanel.style.width = this.width;
-        WorkOrderHeaderPanel.style.height = this.height; 
-   
-      
-        var WorkOrderPicklist = document.createElement('div');
-        WorkOrderPicklist.id = 'workorder-picklist-panel'; 
-        WorkOrderPicklist.className = 'workorderpicklistpanel';   
-        // WorkOrderPicklist.style.height = "32px";
-        // WorkOrderPicklist.style.width = "200px";   
-        WorkOrderPicklist.innerHTML = "Work Orders"; 
-        WorkOrderPicklist.style.top = '0px';
-        WorkOrderPicklist.style.left = '15px'; 
-
-
-        //let selectArray = ["W0001", "W0002", "W0003", "W0004"];
-        let selectArray = this.data;
-
-        let WorkOrderList = document.createElement("select");
-        WorkOrderList.id = "workorderslist";
-        WorkOrderList.className = 'workorderpicklist';   
-        WorkOrderPicklist.appendChild(WorkOrderList);
-
-        let listscope = this.vuforiaScope;
-        function listSelection (e) {
-            //alert('value ' + this.value);
-            // [{"WorkID":"W0001"}]
-            //listscope.outgoingdataField =  [{"WorkID": this.value}]; //this.value;
-            listscope.outgoingdataField =  this.value;
-            listscope.$parent.fireEvent('clicked');
-            //const myTimeout = setTimeout( listscope.$parent.fireEvent('clicked'), 500);
-
-        }
-        
-        //Create and append the options
-        for (var i = 0; i < selectArray.length; i++) {
-        var option = document.createElement("option");
-        option.value = selectArray[i].WorkID;
-        option.text = selectArray[i].Title;
-        WorkOrderList.appendChild(option);
-
-        }
-
-        WorkOrderList.addEventListener("change",  listSelection );
-
-        //Append the div to the higher level div  
-        //WorkOrderPanel.appendChild(WorkOrderHeaderPanel);   
-    
-        //Append the div to the higher level div  
-        WorkOrderHeaderPanel.appendChild(WorkOrderPicklist);
-        
-        var CloseButton = document.createElement('img');
-        CloseButton.className ="closebutton";
-        CloseButton.style.height = "40px";
-        CloseButton.style.width = "40px";
-        //CloseButton.style.position = "absolute";
-        CloseButton.style.top = "0px";
-        CloseButton.style.right = "0px";
-        CloseButton.src = "extensions/images/widgetcoe_close.png";
-        CloseButton.addEventListener("click",  () => { 
-
-            try { 
-                //this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
-            } catch (ex) {
-
-            }
-
-            PanelSelector.removeChild(UIContainerWO);
-    
-        });
-
-        WorkOrderHeaderPanel.appendChild(CloseButton);
-
-
-    
-        UIContainerWO.appendChild(WorkOrderHeaderPanel);
-        PanelSelector.appendChild(UIContainerWO);
-
-
-    }
-
-    getSelectStepPart = function  (step) {
-
-        let partsList = this.data[step-1].PartsList;
-
-        let propertyname = partsList[0].MetadataPropertyName;
-        let uniquepartid = partsList[0].MetadataID;
-        let displayname = partsList[0].DisplayName;
-        let modelName =   partsList[0].ModelName; //this.modelid;
-
-
-
-        return {"model" : modelName , "path" : uniquepartid  };
-    }
-
-    getWorkInstructionsSteps = function () {
-
-
-
-
-        let PanelQuery = 'body > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > twx-widget > twx-widget-content > \n' +
-		'twx-container-content > twx-widget:nth-child(2) > twx-widget-content > div > twx-container-content';
-        let PanelSelector = document.querySelector(PanelQuery); 
-  
-
-        let UIContainerWI = document.createElement('div');
-        UIContainerWI.id = 'ui-container-wi';
-        UIContainerWI.className = 'uicontainer'; 
-        UIContainerWI.style.width = "1px";
-        UIContainerWI.style.height = "1px";
-        UIContainerWI.style.top = this.top;
-        UIContainerWI.style.left = this.left;
-
-        var InstructionPanel = document.createElement('div');
-        InstructionPanel.id = 'instruction-panel';   
-        InstructionPanel.className = 'instructionpanel';  
-        InstructionPanel.style.width = this.width;
-        InstructionPanel.style.height = this.height; 
-      
-        var InstructionContentPanel = document.createElement('div');
-        InstructionContentPanel.id = 'instruction-content-panel';   
-        InstructionContentPanel.className = 'instructioncontentpanel';  
-        InstructionContentPanel.style.height = this.height;;
-
-        var CloseButton = document.createElement('img');
-        CloseButton.className ="closebutton";
-        CloseButton.style.height = "40px";
-        CloseButton.style.width = "40px";
-        CloseButton.style.position = "absolute";
-        CloseButton.style.top = "0px";
-        CloseButton.style.right = "0px";
-        CloseButton.src = "extensions/images/widgetcoe_close.png";
-        CloseButton.addEventListener("click",  () => { 
-
-            try { 
-                //this.markupCanvas.vuforiaScope.$parent.fireEvent('markCancelled');
-            } catch (ex) {
-
-            }
-
-            PanelSelector.removeChild(UIContainerWI);
-    
-        });
-        InstructionContentPanel.appendChild(CloseButton);
-
-        var InstructionHeaderPanel = document.createElement('div');
-        InstructionHeaderPanel.id = 'instruction-header-panel'; 
-        InstructionHeaderPanel.className = 'instructionheaderpanel';    
- 
-      
-        var InstructionStepPanel = document.createElement('div');
-        InstructionStepPanel.id = 'instruction-step-panel'; 
-        InstructionStepPanel.className = 'instructionsteppanel';   
-        
-        let steps = this.data.length ;
-        let currentStep = 1; 
-        InstructionStepPanel.innerHTML = currentStep +" OF " + steps; 
-
-        // var InstructionHeaderActionPanel = document.createElement('div');
-        // InstructionHeaderActionPanel.id = 'instruction-header-action-panel';  
-        // InstructionHeaderActionPanel.className = 'instructionheaderactionpanel'; 
-   
-
-        var InstructionTextPanel = document.createElement('div');
-        InstructionTextPanel.id = 'instruction-text-panel';  
-        InstructionTextPanel.className = 'instructiontextpanel';
-
-        var InstructionHeaderLabelPanel = document.createElement('div');
-        InstructionHeaderLabelPanel.id = 'instruction-header-label-panel';  
-        InstructionHeaderLabelPanel.innerHTML = this.data[currentStep-1].StepType;//"This is the header text"; 
-        InstructionHeaderLabelPanel.className ='instructionheaderlabelpanel';
-        //InstructionHeaderLabelPanel.style.top = '65px';
-        //InstructionHeaderLabelPanel.style.left = '15px'; 
-    
-        var InstructionTextLabelPanel = document.createElement('div');
-        InstructionTextLabelPanel.id = 'instruction-text-label-panel'; 
-        InstructionTextLabelPanel.className = 'instructiontextlabelpanel'; 
-        InstructionTextLabelPanel.innerHTML = this.data[currentStep-1].StepDetail;//"This is the work instruction text"; 
-        
-        //InstructionTextLabelPanel.style.top = '85px';
-        //InstructionTextLabelPanel.style.left = '15px'; 
-    
-        var InstructionActionPanel = document.createElement('div');
-        InstructionActionPanel.id = 'instruction-action-panel'; 
-        InstructionActionPanel.className = 'instructionactionpanel'; 
-    	//InstructionActionPanel.style.top = "140px";
-	    //InstructionActionPanel.style.left =  "25px";
-
-
-        var BackButton = document.createElement('img');
-        //NextButton.name = 'next-button';
-        BackButton.src = "extensions/images/widgetcoe_back.png";   
-        //NextButton.type = 'button'; //Allowed values:  submit, button, reset  
-        //NextButton.diabled = 'false'; 
-        //NextButton.autofocus = 'false';  
-        //NextButton.innerHTML = ''; //The text to show on the button
-        //NextButton.title = 'Next Button'; //Add a tooltip to the button
-        BackButton.className = 'backbutton';   
-        //BackButton.style.top = '25px';
-        BackButton.style.left = '0px'; 
-
-        BackButton.addEventListener("click",  () => { 
-
-            try { 
-
-                if (currentStep != 1 ) { 
-                    currentStep--;
-                } else {
-                    currentStep = this.data.length ;
-                }
-
-                InstructionHeaderLabelPanel.innerHTML = this.data[currentStep-1].StepType;//"This is the header text";
-                InstructionTextLabelPanel.innerHTML = this.data[currentStep-1].StepDetail;//"This is the work instruction text";  
-                InstructionStepPanel.innerHTML = currentStep +" OF " + steps; 
-                
-                this.vuforiaScope.outgoingdataField = this.getSelectStepPart(currentStep);
-                this.vuforiaScope.$parent.fireEvent('clicked');
-                this.vuforiaScope.$parent.$applyAsync();
-
-            } catch (ex) {
-
-            }
-    
-        });
-        
-        //Append the button to the div  
-        InstructionActionPanel.appendChild(BackButton); 
-    
-        var NextButton = document.createElement('img');
-        //NextButton.name = 'next-button';
-        NextButton.src = "extensions/images/widgetcoe_next.png";   
-        //NextButton.type = 'button'; //Allowed values:  submit, button, reset  
-        //NextButton.diabled = 'false'; 
-        //NextButton.autofocus = 'false';  
-        //NextButton.innerHTML = ''; //The text to show on the button
-        //NextButton.title = 'Next Button'; //Add a tooltip to the button
-        NextButton.className = 'nextbutton';   
-        //NextButton.style.top = '25px';
-        NextButton.style.right = '0px'; 
-        NextButton.addEventListener("click",  () => { 
-
-            try { 
-
-                if (currentStep -1  < this.data.length -1 ) { 
-                    currentStep++;
-                } else {
-                    currentStep = 1;
-                }
-
-                InstructionHeaderLabelPanel.innerHTML = this.data[currentStep-1].StepType;//"This is the header text";
-                InstructionTextLabelPanel.innerHTML = this.data[currentStep-1].StepDetail;//"This is the work instruction text";  
-                InstructionStepPanel.innerHTML = currentStep +" OF " + steps; 
-
-                this.vuforiaScope.outgoingdataField = this.getSelectStepPart(currentStep);
-                this.vuforiaScope.$parent.fireEvent('clicked');
-                this.vuforiaScope.$parent.$applyAsync();
-
-            } catch (ex) {
-
-            }
-    
-        });
-        
-        //Append the button to the div  
-        InstructionActionPanel.appendChild(NextButton);   
-            //Append the div to the higher level div  
-            InstructionPanel.appendChild(InstructionContentPanel);   
-                //Append the div to the higher level div  
-                //InstructionTextPanel.appendChild(InstructionActionPanel); 
-                //Append the div to the higher level div  
-                //InstructionContentPanel.appendChild(InstructionHeaderActionPanel);     
-                InstructionContentPanel.appendChild(InstructionActionPanel);
-                //Append the div to the higher level div  
-                InstructionContentPanel.appendChild(InstructionStepPanel);   
-                    //Append the div to the higher level div  
-                    //InstructionHeaderPanel.appendChild(InstructionHeaderActionPanel);    
-                    //Append the div to the higher level div  
-                    //InstructionContentPanel.appendChild(InstructionTextPanel);  
-                    //Append the div to the higher level div  
-                    InstructionContentPanel.appendChild(InstructionHeaderLabelPanel);  
-                    //Append the div to the higher level div  
-                    InstructionContentPanel.appendChild(InstructionTextLabelPanel);    
-                    //Append the div to the higher level div  
-                    //InstructionTextPanel.appendChild(InstructionHeaderLabelPanel);  
-                    //Append the div to the higher level div  
-                    //InstructionTextPanel.appendChild(InstructionTextLabelPanel);    
-        //Append the div to the html  
-        UIContainerWI.appendChild(InstructionPanel);
-        PanelSelector.appendChild(UIContainerWI);
-
-        // fire currect step selected
-        this.vuforiaScope.outgoingdataField = this.getSelectStepPart(currentStep);
-        this.vuforiaScope.$parent.fireEvent('clicked');
-        this.vuforiaScope.$parent.$applyAsync();
-    }
 
     getMetaList = function (data) {
   

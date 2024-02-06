@@ -35,6 +35,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         //
 
         incomingdataField : '=',
+        incomingresourceField : "=",
         outgoingdataField : '=',
         actionidField : '@',
         autolaunchField: '@',
@@ -54,9 +55,17 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       link: function (scope, element, attr) {
 
         let widgetcoe = undefined ;
+        let  runningHololens = false;
+
+        runningHololens = function(props, $scope){
+          let projectSettings = $scope.$root.projectSettings || {};
+          return projectSettings.projectType === 'eyewear';
+        }
+  
 
         scope.data = {  
            args: undefined,
+           widgets: undefined,
            occurance: undefined,
            timeout: $timeout,
            http: $http
@@ -87,6 +96,13 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           //
           //if (widgetcoe == undefined) {
             try {
+
+
+               let runningHololens = true;
+               scope.data.widgetRegister = new WidgetRegister( scope.renderer , $injector , scope , runningHololens );
+
+
+
                widgetcoe = new Widgetcoe(scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField , scope.modelidField , scope.renderer);
                widgetcoe.doAction();
            
@@ -153,6 +169,24 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
         });
 
+        scope.$watch('incomingresourceField', function () {
+          console.log('incomingresourceField='+ scope.incomingresourceField);
+
+          if (scope.incomingresourceField != undefined || scope.incomingresourceField != "") {
+            $http.get(scope.incomingresourceField)
+            .success(function (data, status, headers, config) {
+
+              if (data != undefined) {
+                scope.data.widgets = data.widgets; 
+                start();
+              }
+            })
+            .error(function (data, status, headers, config) {
+              console.log(status);
+            });
+           }
+
+        });
 
         scope.$watch('incomingidField', function () {
           console.log('incomingidField='+ scope.incomingidField);

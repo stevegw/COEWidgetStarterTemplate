@@ -82,6 +82,7 @@ class Widgetcoe {
                         rx: "0",
                         ry: "0",
                         rz: "0",
+                        scale: "1",
                         visible : true,
                         events:[{name:"modelLoaded", value: "someExample()"}]
                     })

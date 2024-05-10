@@ -15,11 +15,11 @@
   // Changes to your implemenation file in this case called widgetcoe.js you only need to start preview again
 
 (function() {
-  function twxWidgetcoe() {
+  function wdgwidgetcoe() {
     return {
       // Required, this will be used as the top level tag when it's dropped on the Canvas
       // use a custom prefix to so the name won't collide with other widgets
-      elementTag: 'twx-widgetcoe',
+      elementTag: 'wdg-widgetcoe',
 
       // Text displayed for the widget in the Palette
       // This will also be the name of the icon in ide/images directory
@@ -201,6 +201,6 @@
 
   // registers the widget in Studio so that it gets displayed in the Widget Palette, it will only show up in the
   // Widget Palette for views that this widget is registered for (as determined by category property)
-  twxAppBuilder.widget('twxWidgetcoe', twxWidgetcoe);
+  twxAppBuilder.widget('wdg-Widgetcoe', wdgwidgetcoe);
 
 }());

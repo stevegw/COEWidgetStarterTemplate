@@ -36,12 +36,7 @@ class Widgetcoe {
             this.vuforiaScope.$parent.fireEvent('completed');
             this.vuforiaScope.$parent.$applyAsync();
 
-        } else if (this.actionid == 'GetWorkOrder') {
-            this.getWorkOrders (this.data);
-        }
-        else if (this.actionid == 'GetWorkInstructions') {
-            this.getWorkInstructionsSteps (this.data);
-        }
+        } 
         else if (this.actionid == 'GetMetaList') {
             this.getMetaList (this.data);
         }
@@ -59,43 +54,6 @@ class Widgetcoe {
         else if (this.actionid == 'GetDynamicModel') {
             this.getDynamicModel(this.vuforiaScope, this.data );
         }
-
-        else if (this.actionid === 'RegisterWidgets') {
-
-            try {
-
-
-                //var modelsJSON = new Array();
-                //modelsJSON.push( {'model' : "sphere-1" , 'src': "sphere.pvz" , 'x': "0", 'y': "0", 'z': "0" });
-                //modelsJSON.push( {'model' : "sphere-2" , 'src': "sphere.pvz" , 'x': "0.1", 'y': "0", 'z': "0" });
-                //modelsJSON.push( {'model' : "sphere-3" , 'src': "sphere.pvz" , 'x': "0.2", 'y': "0", 'z': "0" });
-
-                for (let index = 0; index < this.vuforiaScope.data.widgets.length; index++) {
-                    const element = this.vuforiaScope.data.widgets[index];
-                    this.vuforiaScope.data.widgetRegister.addWidget({
-                        originalWidget: "twx-dt-model",
-                        id: element.model,
-                        src: "app/resources/Uploaded/"+element.src ,  //"app/resources/Uploaded/remote-control.pvz",
-                        x: element.x,
-                        y: element.y,
-                        z: element.z,
-                        rx: "0",
-                        ry: "0",
-                        rz: "0",
-                        scale: "1",
-                        visible : true,
-                        events:[{name:"modelLoaded", value: "someExample()"}]
-                    })
-                    console.log("Model" + element.src);
-
-                }
-
-                
-            } catch (error) {
-                console.log("Issues with widgetRegister error=" + error);
-            }
-        }
-
 
         else  {
             // add more functions here with else if 
